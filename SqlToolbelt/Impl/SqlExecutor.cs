@@ -1,6 +1,7 @@
+using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
+using System.Data.Common;
 
 namespace SqlToolbelt.Impl
 {
@@ -13,9 +14,11 @@ namespace SqlToolbelt.Impl
             _connection = connection;
         }
 
-        public SqlExecutor(string connectionString)
+        public SqlExecutor(string connectionString, string providerInvariantName)
         {
-            _connection = new SqlConnection(connectionString);
+            var dbProviderFactory = DbProviderFactories.GetFactory(providerInvariantName);
+            _connection = dbProviderFactory.CreateConnection();
+            _connection.ConnectionString = connectionString;
         }
 
         public void Execute(string sql)

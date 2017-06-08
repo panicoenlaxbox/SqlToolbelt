@@ -8,13 +8,14 @@ namespace SqlToolbelt.Impl
     {
         public IEnumerable<string> Parse(string batch)
         {
-            const string pattern = @"(^GO)|(\n{1}GO)";
+            const string pattern = @"(^\s*GO\s*$)";
             const RegexOptions options = RegexOptions.IgnoreCase | RegexOptions.Multiline;
-            return Regex.Split(batch, pattern, options)
-                .Where(p => !p.Equals("GO") && !p.Equals("\nGO") && !string.IsNullOrWhiteSpace(p))
+            IEnumerable<string> list = Regex.Split(batch, pattern, options);
+            return list
                 .Select(s => s.TrimStart('\n', '\r'))
                 .Select(s => s.TrimEnd('\n', '\r'))
-                .Select(s => s.Trim());
+                .Select(s => s.Trim())
+                .Where(p => !p.Equals("GO") && !string.IsNullOrWhiteSpace(p));
         }
     }
 }

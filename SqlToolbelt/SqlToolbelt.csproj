@@ -42,11 +42,13 @@
   <ItemGroup>
     <Compile Include="Impl\DatabaseManager.cs" />
     <Compile Include="IDatabaseManager.cs" />
-    <Compile Include="ISqlBatchExecutor.cs" />
+    <Compile Include="Impl\SqlEmbeddedResourceExecutor.cs" />
+    <Compile Include="ISqlEmbeddedResourceExecutor.cs" />
+    <Compile Include="ISqlFileExecutor.cs" />
     <Compile Include="ISqlExecutor.cs" />
     <Compile Include="ISqlParser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Impl\SqlBatchExecutor.cs" />
+    <Compile Include="Impl\SqlFileExecutor.cs" />
     <Compile Include="Impl\SqlExecutor.cs" />
     <Compile Include="Impl\SqlParser.cs" />
   </ItemGroup>
